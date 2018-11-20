@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { reducer as reduxFormReducer } from "redux-form";
 
 import {userReducer} from "./userReducer";
 
@@ -11,5 +12,6 @@ import {userReducer} from "./userReducer";
  */
 
 export const rootReducer = combineReducers({
+    form: reduxFormReducer,
     user: userReducer
 });

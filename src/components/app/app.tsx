@@ -1,17 +1,13 @@
 import React from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import {FormSubmitHandler} from "redux-form";
 
 import {State} from "../../store/state";
 
 import {AppDisplay} from "../appDisplay/appDisplay";
-import {AppForm} from "../appForm/appForm";
-import {setUserFirstName, setUserLastName} from "../../actionCreators/userActionCreators";
-
-export interface AppProps {
-    firstName: string;
-    lastName: string;
-}
+import {AppFormData, ConnectedAppForm} from "../appForm/appForm";
+import {setUserInformation} from "../../actionCreators/userActionCreators";
 
 function mapStateToProps(state: State) {
     return {
@@ -22,7 +18,7 @@ function mapStateToProps(state: State) {
 
 function mapActionToProps(dispatch: any) {
     return {
-        actions: bindActionCreators({setUserFirstName, setUserLastName}, dispatch)
+        actions: bindActionCreators({setUserInformation}, dispatch)
     };
 }
 
@@ -34,10 +30,7 @@ export const App = (props: AllProps) => (
     <>
         <AppDisplay firstName={props.firstName}
                     lastName={props.lastName} />
-        <AppForm firstName={props.firstName}
-                 lastName={props.lastName}
-                 onFirstNameChange={firstName => props.actions.setUserFirstName(firstName)}
-                 onLastNameChange={lastName => props.actions.setUserLastName(lastName)} />
+        <ConnectedAppForm onSubmit={props.actions.setUserInformation as FormSubmitHandler<AppFormData>} />
     </>
 );
 

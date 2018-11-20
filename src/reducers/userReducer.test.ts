@@ -9,22 +9,12 @@ it('should return initialState when calling with no action', () => {
     expect(newState).toMatchObject(initialState.user);
 });
 
-it('should return modified state when calling with USER_SET_FIRST_NAME', () => {
+it('should return modified state when calling with USER_SET_INFORMATION', () => {
     const testInitialState = {firstName: "first name 1", lastName: "last name 1"};
-    const action = {type: userActionTypes.USER_SET_FIRST_NAME, payload: {firstName: "first name 2"}};
+    const action = {type: userActionTypes.USER_SET_INFORMATION, payload: {info: {firstName: "first name 2", lastName: "last name 2"}}};
     const newState = userReducer(testInitialState, action);
     expect(newState).toMatchObject({
         firstName: "first name 2",
-        lastName: "last name 1"
-    });
-});
-
-it('should return modified state when calling with USER_SET_LAST_NAME', () => {
-    const testInitialState = {firstName: "first name 1", lastName: "last name 1"};
-    const action = {type: userActionTypes.USER_SET_LAST_NAME, payload: {lastName: "last name 2"}};
-    const newState = userReducer(testInitialState, action);
-    expect(newState).toMatchObject({
-        firstName: "first name 1",
         lastName: "last name 2"
     });
 });

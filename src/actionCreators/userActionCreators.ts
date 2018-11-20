@@ -1,15 +1,8 @@
 import {userActionTypes} from "../actionTypes/userActionTypes";
 
-export const setUserFirstName = (firstName: string) => {
+export const setUserInformation = (info: {firstName: string, lastName: string}) => {
     return {
-        type: userActionTypes.USER_SET_FIRST_NAME,
-        payload: {firstName}
-    }
-};
-
-export const setUserLastName = (lastName: string) => {
-    return {
-        type: userActionTypes.USER_SET_LAST_NAME,
-        payload: {lastName}
+        type: userActionTypes.USER_SET_INFORMATION,
+        payload: {info}
     }
 };
