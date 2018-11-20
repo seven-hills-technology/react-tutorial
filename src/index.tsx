@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { App } from "./components/app"
 
 ReactDOM.render(
-    <App />,
+    <App firstName={"Bob"}
+         lastName={"Bobberton"} />,
     document.getElementById('app-root')
 );
