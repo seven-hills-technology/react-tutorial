@@ -1,9 +1,9 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {AppDisplay, AppProps} from "./appDisplay";
+import {AppDisplay, AllProps} from "./appDisplay";
 
 it('says hello to jason', () => {
-    const props: AppProps = {
+    const props: AllProps = {
         firstName: "Jason",
         lastName: "Johnson"
     };
@@ -17,7 +17,7 @@ it('says hello to jason', () => {
 });
 
 it('says hello to jason with props spread', () => {
-    const props: AppProps = {
+    const props: AllProps = {
         firstName: "Jason",
         lastName: "Johnson"
     };

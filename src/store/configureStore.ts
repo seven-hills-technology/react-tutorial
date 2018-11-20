@@ -1,8 +1,10 @@
 import {applyMiddleware, createStore} from 'redux';
 import reduxThunk from 'redux-thunk';
 import { composeWithDevTools } from "redux-devtools-extension";
-import { rootReducer } from '../reducers';
+import { createRootReducer } from '../reducers';
 import { State } from "./state";
+import { history } from "./history";
+import {routerMiddleware} from "connected-react-router";
 
 export type RecursivePartial<T> = {
     [P in keyof T]?: RecursivePartial<T[P]>;
@@ -10,11 +12,12 @@ export type RecursivePartial<T> = {
 
 export function configureStore(initialState?: RecursivePartial<State>) {
     const middleware = [
-        reduxThunk
+        reduxThunk,
+        routerMiddleware(history)
     ];
 
     return createStore(
-        rootReducer,
+        createRootReducer(history),
         initialState, 
         composeWithDevTools(
             applyMiddleware(...middleware)

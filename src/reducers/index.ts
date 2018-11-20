@@ -1,5 +1,7 @@
 import { combineReducers } from "redux";
 import { reducer as reduxFormReducer } from "redux-form";
+import {History} from "history";
+import {connectRouter} from "connected-react-router";
 
 import {userReducer} from "./userReducer";
 
@@ -11,7 +13,8 @@ import {userReducer} from "./userReducer";
  * reducer functions.
  */
 
-export const rootReducer = combineReducers({
+export const createRootReducer = (history: History) => combineReducers({
+    router: connectRouter(history),
     form: reduxFormReducer,
     user: userReducer
 });
