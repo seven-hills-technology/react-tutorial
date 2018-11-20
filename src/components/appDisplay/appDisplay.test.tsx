@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {App, AppProps} from "./app";
+import {AppDisplay, AppProps} from "./appDisplay";
 
 it('says hello to jason', () => {
     const props: AppProps = {
@@ -9,8 +9,8 @@ it('says hello to jason', () => {
     };
 
     const wrapper = shallow(
-        <App firstName={props.firstName}
-             lastName={props.lastName} />
+        <AppDisplay firstName={props.firstName}
+                    lastName={props.lastName} />
     );
 
     expect(wrapper.text()).toBe("Hello, Jason Johnson!");
@@ -23,7 +23,7 @@ it('says hello to jason with props spread', () => {
     };
 
     const wrapper = shallow(
-        <App {...props} />
+        <AppDisplay {...props} />
     );
 
     expect(wrapper.text()).toBe("Hello, Jason Johnson!");

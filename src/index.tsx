@@ -1,9 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { App } from "./components/app"
+import { Provider } from 'react-redux'
+
+import { store } from "./store"
+
+import {ConnectedApp} from "./components/app/app"
 
 ReactDOM.render(
-    <App firstName={"Bob"}
-         lastName={"Bobberton"} />,
+    <Provider store={store}>
+        <ConnectedApp />
+    </Provider>,
     document.getElementById('app-root')
 );
