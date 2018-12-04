@@ -1,4 +1,5 @@
 import React from "react";
+import {ListDisplay} from "./listDisplay"
 
 export interface OurComponentProps {
     elements: string[];
@@ -44,23 +45,13 @@ export class List extends React.Component<OurComponentProps, OurComponentState> 
 
     render() {
         const elements = this.props.elements || [];
-        const style = {color: this.props.textColor};
         return (
-            <ul style={style}>
-                {
-                    elements.map((element, index) =>
-                        (
-                            <li key={index}>
-                                {element}
-                            </li>
-                        )
-                    )
-                }
-                <li>
-                    <input value={this.state.newElementTextValue} onChange={this.newElementTextOnChange.bind(this)} />
-                    <button onClick={this.addNewElement.bind(this)}>Add</button>
-                </li>
-            </ul>
+            <ListDisplay
+                elements={elements}
+                textColor={this.props.textColor}
+                newElementTextValue={this.state.newElementTextValue}
+                newElementTextOnChange={this.newElementTextOnChange.bind(this)}
+                addNewElement={this.addNewElement.bind(this)} />
         )
     }
 }
