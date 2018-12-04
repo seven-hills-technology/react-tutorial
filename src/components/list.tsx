@@ -1,9 +1,10 @@
 import React from "react";
 import {ListDisplay} from "./listDisplay"
+import {State} from "../store/state";
+import {connect} from "react-redux";
 
 export interface OurComponentProps {
-    elements: string[];
-    addNewElementToList(newElement: string): void;
+    // addNewElementToList(newElement: string): void;
     textColor: string;
 }
 
@@ -11,8 +12,13 @@ export interface OurComponentState {
     newElementTextValue: string
 }
 
-export class List extends React.Component<OurComponentProps, OurComponentState> {
-    constructor(props: OurComponentProps) {
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ReturnType<typeof mapActionToProps>;
+export type CombinedProps = OurComponentProps & StateProps & DispatchProps;
+
+export class List extends React.Component<CombinedProps, OurComponentState> {
+    constructor(props: CombinedProps) {
         super(props);
 
         this.state = {
@@ -27,11 +33,7 @@ export class List extends React.Component<OurComponentProps, OurComponentState> 
         // ];
         // this.props.elements = newList;
 
-        this.props.addNewElementToList(this.state.newElementTextValue);
-        this.setState({
-            ...this.state,
-            newElementTextValue: ""
-        });
+        // this.props.addNewElementToList(this.state.newElementTextValue);
     }
 
     newElementTextOnChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -44,7 +46,7 @@ export class List extends React.Component<OurComponentProps, OurComponentState> 
     }
 
     render() {
-        const elements = this.props.elements || [];
+        const elements = this.props.elements;
         return (
             <ListDisplay
                 elements={elements}
@@ -55,3 +57,19 @@ export class List extends React.Component<OurComponentProps, OurComponentState> 
         )
     }
 }
+
+
+
+function mapStateToProps(state: State) {
+    return {
+        elements: state.ourList.elements
+    };
+}
+
+function mapActionToProps(dispatch: any) {
+    return {
+        // actions: bindActionCreators({submitAuth, initializeAuth}, dispatch)
+    };
+}
+
+export const ConnectedList = connect(mapStateToProps, mapActionToProps)(List);
