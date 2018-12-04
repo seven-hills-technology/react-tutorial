@@ -2,6 +2,8 @@ import React from "react";
 import {ListDisplay} from "./listDisplay"
 import {State} from "../store/state";
 import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import {addElementToList} from "../actionCreators/ourListActionCreators";
 
 export interface OurComponentProps {
     // addNewElementToList(newElement: string): void;
@@ -34,6 +36,7 @@ export class List extends React.Component<CombinedProps, OurComponentState> {
         // this.props.elements = newList;
 
         // this.props.addNewElementToList(this.state.newElementTextValue);
+        this.props.actions.addElementToList(this.state.newElementTextValue);
     }
 
     newElementTextOnChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -68,7 +71,7 @@ function mapStateToProps(state: State) {
 
 function mapActionToProps(dispatch: any) {
     return {
-        // actions: bindActionCreators({submitAuth, initializeAuth}, dispatch)
+        actions: bindActionCreators({addElementToList}, dispatch)
     };
 }
 
